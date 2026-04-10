@@ -1,0 +1,23 @@
+{
+    "name": "LifetimeScopes",
+    "rootNamespace": "",
+    "references": [
+        "Core",
+        "GameSystems",
+        "InventorySystem",
+        "Item",
+        "Narrative",
+        "CCTV",
+        "VContainer",
+        "VContainer.Unity"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,26 @@
+{
+    "name": "GameSystems",
+    "rootNamespace": "",
+    "references": [
+        "CCTV",
+        "Core",
+        "InventorySystem",
+        "Item",
+        "Narrative",
+        "Restorasi",
+        "Unity.InputSystem",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI",
+        "VContainer",
+        "VContainer.Unity"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
