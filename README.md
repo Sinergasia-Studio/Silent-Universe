@@ -1,50 +1,89 @@
-# Project Description
+Here's the updated README with the Discord link added:
 
-A modular Unity game system prototype focused on scalable architecture, reusable gameplay mechanics, and clean separation of concerns.
-This project demonstrates how multiple gameplay systems (AI, environment interaction, checkpoints, CCTV mechanics, repair mechanics, and event-driven logic) can be organized into independent modules suitable for solo developers aiming for production-ready code quality.
+***
 
-Designed with maintainability and extensibility in mind, each feature is implemented as a loosely coupled system using assembly definitions and cross-scene event channels to reduce dependencies between modules.
+# Modular Unity Game System Prototype
+
+A scalable, production-ready Unity prototype showcasing modular architecture, reusable gameplay mechanics, and clean separation of concerns. Perfect for solo developers building mid-to-large projects.
+
+**Demo**: [Live Demo Link] | **Unity Version**: 2022.3 LTS
 
 ## Key Features
-Modular Architecture <br>
-Systems are separated into independent modules (Environment, GameSystems, CCTV, Etc) <br>
-Clear boundaries between gameplay logic and shared core functionality <br>
-Scalable structure suitable for mid-to-large solo projects <br>
 
-## Gameplay Systems <br>
+### Modular Architecture
+- Independent modules: Environment, GameSystems, CCTV, AI, and more
+- Clear boundaries: Strict separation between gameplay logic and core systems
+- Scalable design: Built for easy expansion and long-term maintenance
+- Assembly Definitions: Organized with `.asmdef` files for optimal performance
 
-CCTV camera system with save & restore functionality <br>
-Enemy AI with peek points and environmental awareness <br>
-Checkpoint system for progress tracking <br>
-Fuse box and electrical interaction mechanics <br>
-Disk repair interaction system <br>
-Choppable objects for environmental interaction <br>
-Footstep system for player feedback and immersion <br> 
-Dampener state controller for dynamic gameplay effects <br>
+### Core Gameplay Systems
+- CCTV Camera System - Full save/restore functionality
+- Enemy AI - Peek points with environmental awareness
+- Checkpoint System - Robust progress tracking
+- Fuse Box Mechanics - Electrical interaction system
+- Disk Repair - Interactive repair mechanics
+- Choppable Objects - Dynamic environmental interactions
+- Footstep System - Immersive audio feedback
+- Dampener Controller - Dynamic gameplay state management
 
-## Event-driven communication <br>
+### Production-Ready Structure
+```
+Assets/
+├── Core/                 # Shared foundation systems
+├── GameSystems/          # Gameplay modules
+├── Environment/          # Interactive world systems
+├── CCTV/                # Surveillance mechanics
+├── AI/                  # Enemy behavior systems
+└── Events/              # Cross-scene communication
+```
 
-Cross-scene event channels used to reduce tight coupling <br>
-Flexible communication between systems without direct references <br>
+## Project Goals
 
-Production-oriented structure <br>
+This repository provides a battle-tested foundation for solo developers who want to:
 
-Organized using Assembly Definition Files (.asmdef) <br>
-Clean folder hierarchy based on responsibility <br>
-Designed for easy feature expansion and refactoring <br>
-Goal of the Project <br>
+- Learn scalable Unity architecture patterns
+- Build reusable, production-ready gameplay systems
+- Avoid tightly coupled "spaghetti code"
+- Maintain long-term project stability and performance
 
-This repository serves as a foundation for building a complete game while maintaining code clarity and flexibility. <br>
-It is particularly suited for solo developers who want to:
+## Event-Driven Communication
 
-learn scalable Unity architecture <br>
-build reusable gameplay systems <br>
-avoid tightly coupled code <br>
-maintain long-term project stability <br>
-Tech Stack <br>
-Unity (C#) <br>
-Assembly Definition modularization <br>
-Event-driven architecture pattern <br>
-Status : <br>
+- Cross-scene Event Channels eliminate direct references
+- Loose coupling between all systems
+- Hot-swappable modules without breaking dependencies
 
-Work in progress — systems are continuously being improved and refactored toward production-ready standards.
+## Tech Stack
+- Unity 2022.3 LTS (C#)
+- Assembly Definition Files (.asmdef)
+- Event-Driven Architecture
+- ScriptableObject-based data systems
+
+## Quick Start
+
+1. Clone the repository
+2. Open `ModularGamePrototype.sln` in Unity Hub
+3. Navigate to `Scenes/MainDemo.unity`
+4. Press Play to experience all systems in action!
+
+## Status
+**Work In Progress**  
+Continuously refactored toward production-ready standards. New systems and optimizations added weekly.
+
+## Contributing
+```
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingNewSystem`)
+3. Commit your changes (`git commit -m 'Add: AmazingNewSystem'`)
+4. Push to branch (`git push origin feature/AmazingNewSystem`)
+5. Open a Pull Request
+```
+
+## License
+MIT License - See [LICENSE](LICENSE) file for details.
+
+***
+
+**Built for solo Unity developers**  
+Questions? Open an issue or join the Discord: [https://discord.gg/GrBvTerFjE](https://discord.gg/GrBvTerFjE)
+
+***
