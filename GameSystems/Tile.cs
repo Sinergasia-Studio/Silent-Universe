@@ -118,6 +118,7 @@ public class Tile : MonoBehaviour
 
         // Notify sanity system — mulai hitung sanity dari note pertama
         SanitySystem.Instance?.NotifyFirstHit();
+        NoiseTracker.Instance?.NotifyFirstTileHit();
 
         gm?.UnregisterTile(this, laneIndex);
         Release();
