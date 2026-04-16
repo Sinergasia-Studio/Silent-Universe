@@ -156,7 +156,7 @@ public sealed class PlayerMovement : MonoBehaviour
         inputActions?.FindActionMap(actionMapName)?.Enable();
     }
 
-    private void OnDisable()
+    private void OnDisable()    
     {
         inputActions?.FindActionMap(actionMapName)?.Disable();
     }

@@ -1,11 +1,6 @@
 using UnityEngine;
 using VContainer;
 
-/// <summary>
-/// FlashlightSoundFeedback — pasang pada Player GameObject.
-/// soundOn diputar loop selama flashlight menyala (hold), stop saat release.
-/// Suara lain diputar sekali sebagai one-shot.
-/// </summary>
 public class FlashlightSoundFeedback : MonoBehaviour
 {
     [Header("Audio Source — Loop (untuk suara On)")]
@@ -15,7 +10,6 @@ public class FlashlightSoundFeedback : MonoBehaviour
     [SerializeField] private AudioSource oneShotSource;
 
     [Header("Sounds")]
-    [Tooltip("Suara buzz/hum selama flashlight menyala — diloop")]
     [SerializeField] private AudioClip soundOn;
     [SerializeField] private AudioClip soundOff;
     [SerializeField] private AudioClip soundBatteryDepleted;
@@ -29,13 +23,18 @@ public class FlashlightSoundFeedback : MonoBehaviour
     [SerializeField] [Range(0f, 1f)] private float loopVolume    = 0.5f;
     [SerializeField] [Range(0f, 1f)] private float oneShotVolume = 0.8f;
 
+    [Header("Reverb Settings")]
+    [SerializeField] [Range(0f, 1f)] private float onReverbLevel = 0.5f;
+    [SerializeField] [Range(0f, 1f)] private float offReverbLevel = 0f;
+
+    
+
     [Inject] private FlashlightController _flashlight;
 
     private FlashlightController _fl;
 
     private void Awake()
     {
-        // Auto-resolve: buat dua AudioSource jika belum diassign
         var sources = GetComponents<AudioSource>();
 
         if (loopSource == null)
@@ -48,6 +47,10 @@ public class FlashlightSoundFeedback : MonoBehaviour
         loopSource.loop           = true;
         oneShotSource.playOnAwake = false;
         oneShotSource.loop        = false;
+
+        // Register ke AudioManager — mixer group Flashlight di-assign otomatis
+        AudioServices.Manager?.RegisterSource(AudioCategory.Flashlight, loopSource);
+        AudioServices.Manager?.RegisterSource(AudioCategory.Flashlight, oneShotSource);
     }
 
     private void Start()
@@ -67,6 +70,10 @@ public class FlashlightSoundFeedback : MonoBehaviour
 
     private void OnDestroy()
     {
+        // Unregister saat scene unload
+        AudioServices.Manager?.UnregisterSource(AudioCategory.Flashlight, loopSource);
+        AudioServices.Manager?.UnregisterSource(AudioCategory.Flashlight, oneShotSource);
+
         if (_fl == null) return;
 
         _fl.onFlashlightOn.RemoveListener(OnOn);
@@ -85,24 +92,30 @@ public class FlashlightSoundFeedback : MonoBehaviour
 
     private void OnOn()
     {
-        if (soundOn == null) return;
-        loopSource.clip   = soundOn;
-        loopSource.volume = loopVolume;
-        loopSource.Play();
+if (soundOn == null) return;
+    loopSource.clip   = soundOn;
+    loopSource.volume = loopVolume;
+    loopSource.Play();
+    
+    // Mengaktifkan reverb saat senter nyala
+    AudioServices.Manager?.SetFlashlightReverb(onReverbLevel); // Aktifkan reverb
     }
 
     private void OnOff()
     {
-        StopLoop();
-        PlayOneShot(soundOff);
+    StopLoop();
+    PlayOneShot(soundOff);
+    
+    // Mematikan/mengurangi reverb saat senter mati
+    AudioServices.Manager?.SetFlashlightReverb(offReverbLevel); // Matikan reverb
     }
 
-    private void OnBatteryDepleted()  => PlayOneShot(soundBatteryDepleted);
-    private void OnOverheatStart()    { StopLoop(); PlayOneShot(soundOverheatStart); }
-    private void OnOverheatEnd()      => PlayOneShot(soundOverheatEnd);
-    private void OnRechargeComplete() => PlayOneShot(soundRechargeComplete);
+    private void OnBatteryDepleted()    => PlayOneShot(soundBatteryDepleted);
+    private void OnOverheatStart()      { StopLoop(); PlayOneShot(soundOverheatStart); }
+    private void OnOverheatEnd()        => PlayOneShot(soundOverheatEnd);
+    private void OnRechargeComplete()   => PlayOneShot(soundRechargeComplete);
     private void OnBrokenStart(float _) { StopLoop(); PlayOneShot(soundBrokenStart); }
-    private void OnBrokenEnd()        => PlayOneShot(soundBrokenEnd);
+    private void OnBrokenEnd()          => PlayOneShot(soundBrokenEnd);
 
     // ── Helpers ──
 
